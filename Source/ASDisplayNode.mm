@@ -3546,6 +3546,18 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   return _isAccessibilityContainer;
 }
 
+- (void)setAccessibilityElementsBlock:(ASDisplayNodeAccessibilityElementsBlock)accessibilityElementsBlock
+{
+  MutexLocker l(__instanceLock__);
+  _accessibilityElementsBlock = accessibilityElementsBlock;
+}
+
+- (ASDisplayNodeAccessibilityElementsBlock)accessibilityElementsBlock
+{
+  MutexLocker l(__instanceLock__);
+  return _accessibilityElementsBlock;
+}
+
 - (NSString *)defaultAccessibilityLabel
 {
   return nil;

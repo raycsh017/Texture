@@ -243,6 +243,7 @@ static constexpr CACornerMask kASCACornerAllCorners =
   CGPoint _accessibilityActivationPoint;
   UIBezierPath *_accessibilityPath;
   BOOL _isAccessibilityContainer;
+  ASDisplayNodeAccessibilityElementsBlock _accessibilityElementsBlock;
 
 
   // Safe Area support
