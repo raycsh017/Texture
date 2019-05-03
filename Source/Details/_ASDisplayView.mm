@@ -78,6 +78,7 @@ static _ASDisplayViewMethodOverrides GetASDisplayViewMethodOverrides(Class c)
   BOOL _inPointInside;
 
   NSArray *_accessibilityElements;
+  NSArray *_customAccessibilityElements;
   CGRect _lastAccessibilityElementsFrame;
   
   _ASDisplayViewMethodOverrides _methodOverrides;

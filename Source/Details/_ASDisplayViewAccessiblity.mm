@@ -245,6 +245,7 @@ static void CollectAccessibilityElementsForView(UIView *view, NSMutableArray *el
 
 @interface _ASDisplayView () {
   NSArray *_accessibilityElements;
+  NSArray *_customAccessibilityElements;
 }
 
 @end
@@ -257,6 +258,7 @@ static void CollectAccessibilityElementsForView(UIView *view, NSMutableArray *el
 {
   ASDisplayNodeAssertMainThread();
   _accessibilityElements = nil;
+  _customAccessibilityElements = accessibilityElements;
 }
 
 - (NSArray *)accessibilityElements
@@ -268,6 +270,10 @@ static void CollectAccessibilityElementsForView(UIView *view, NSMutableArray *el
     return @[];
   }
 
+  if(_customAccessibilityElements != nil && _customAccessibilityElements.count > 0) {
+    return _customAccessibilityElements;
+  }
+
   if (_accessibilityElements == nil || ASActivateExperimentalFeature(ASExperimentalDisableAccessibilityCache)) {
     _accessibilityElements = [viewNode accessibilityElements];
   }
@@ -277,6 +283,11 @@ static void CollectAccessibilityElementsForView(UIView *view, NSMutableArray *el
 @end
 
 @implementation ASDisplayNode (AccessibilityInternal)
+
+- (void)setAccessibilityElements:(NSArray *)accessibilityElements
+{
+  self.view.accessibilityElements = accessibilityElements;
+}
 
 - (NSArray *)accessibilityElements
 {
